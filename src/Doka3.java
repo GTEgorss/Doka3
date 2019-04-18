@@ -56,20 +56,9 @@ public class Doka3 {
             if (menuPanel.exit) {
                 System.exit(0);
             }
-            ///////Last level; memorizing
-            int bufLastLevel = menuPanel.lastLevel;
-            for (int i = 0; i < 5; ++i) {
-                if (gamePanels.get(i).passed) {
-                    if (i < 4) {
-                        menuPanel.lastLevel = i + 1;
-                    } else {
-                        menuPanel.lastLevel = 4;
-                    }
-                }
-            }
-            if (menuPanel.lastLevel != bufLastLevel) {
-                writer.write(menuPanel, menuPanel.lastLevel + "", "media/lastLevel.txt");
-            }
+
+            ///////Last level
+            menuPanel.upgrade(gamePanels);
 
             ///////Cooperation with gamePanels
             if (menuPanel.mode == 0 && menuPanel.opened) {

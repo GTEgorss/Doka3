@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuPanel extends JPanel {
@@ -87,5 +90,25 @@ public class MenuPanel extends JPanel {
             }
         });
         add(quit);
+    }
+
+    public void upgrade(ArrayList<GamePanel> gamePanels) {
+        ///////Last level; memorizing
+        int bufLastLevel = lastLevel;
+        for (int i = 0; i < 5; ++i) {
+            if (gamePanels.get(i).passed) {
+                if (i < 4) {
+                    lastLevel = i + 1;
+                } else {
+                    lastLevel = 4;
+                }
+            }
+        }
+        try (FileWriter writer = new FileWriter(getClass().getResource("media/lastLevel.txt").getPath(), false)) {
+            writer.write(lastLevel + "");
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
