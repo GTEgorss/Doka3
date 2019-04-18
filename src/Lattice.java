@@ -14,7 +14,7 @@ public class Lattice {
     }
 
     public Lattice(int x, int y, int width, int height) throws IOException {
-        lattice = ImageIO.read(new File("/Users/egorsergeev/IdeaProjects/Doka3/src/lattice.png"));
+        lattice = ImageIO.read(getClass().getResourceAsStream("media/lattice.png"));
         this.x = x;
         this.y = y;
         this.width = width;

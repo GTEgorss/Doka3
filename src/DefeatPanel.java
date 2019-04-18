@@ -2,7 +2,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class DefeatPanel extends JPanel {
@@ -15,7 +14,7 @@ public class DefeatPanel extends JPanel {
         setLayout(null);
         setBackground(Color.white);
 
-        failed = ImageIO.read(new File("/Users/egorsergeev/IdeaProjects/Doka3/src/fail.png"));
+        failed = ImageIO.read(getClass().getResourceAsStream("media/fail.png"));
     }
 
     @Override

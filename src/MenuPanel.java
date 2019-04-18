@@ -17,16 +17,16 @@ public class MenuPanel extends JPanel {
 
     MyFont myFont;
 
-    public MenuPanel() throws FileNotFoundException {
+    public MenuPanel() {
         setLayout(null);
         setBackground(Color.white);
 
         myFont = new MyFont();
 
-        Scanner scanner = new Scanner(new File("/Users/egorsergeev/IdeaProjects/Doka3/src/lastLevel.txt"));
+        Scanner scanner = new Scanner(getClass().getResourceAsStream("media/lastLevel.txt"));
         lastLevel = scanner.nextInt();
 
-        ImageIcon startIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/start.png");
+        ImageIcon startIcon = new ImageIcon(getClass().getResource("media/start.png"));
         JButton start = new JButton(startIcon);
         start.setBorder(BorderFactory.createLineBorder(Color.white, 0));
         start.setBounds(520, 250, startIcon.getIconWidth(), startIcon.getIconHeight());
@@ -38,7 +38,7 @@ public class MenuPanel extends JPanel {
         });
         add(start);
 
-        ImageIcon penIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/pen.png");
+        ImageIcon penIcon = new ImageIcon(getClass().getResource("media/pen.png"));
         JButton pen = new JButton(penIcon);
         pen.setBorder(BorderFactory.createLineBorder(Color.white, 0));
         pen.setBounds(260, 240, penIcon.getIconWidth(), penIcon.getIconHeight());
@@ -50,7 +50,7 @@ public class MenuPanel extends JPanel {
         });
         add(pen);
 
-        ImageIcon levelsIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/levels.png");
+        ImageIcon levelsIcon = new ImageIcon(getClass().getResource("media/levels.png"));
         JButton levels = new JButton(levelsIcon);
         levels.setBorder(BorderFactory.createLineBorder(Color.white, 0));
         levels.setBounds(820, 250, levelsIcon.getIconWidth(), levelsIcon.getIconHeight());
@@ -62,7 +62,7 @@ public class MenuPanel extends JPanel {
         });
         add(levels);
 
-        ImageIcon settingsIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/settings.png");
+        ImageIcon settingsIcon = new ImageIcon(getClass().getResource("media/settings.png"));
         JButton settings = new JButton(settingsIcon);
         settings.setBorder(BorderFactory.createLineBorder(Color.white, 0));
         settings.setBounds(1180, 600, settingsIcon.getIconWidth(), settingsIcon.getIconHeight());

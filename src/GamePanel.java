@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {
 
         setLayout(null);
 
-        ImageIcon backIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/fuckGoBack.png");
+        ImageIcon backIcon = new ImageIcon(getClass().getResource("media/fuckGoBack.png"));
         JButton back = new JButton(backIcon);
         back.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         back.setBounds(15, 15, backIcon.getIconWidth(), backIcon.getIconHeight());
@@ -65,7 +65,7 @@ public class GamePanel extends JPanel {
         });
         add(back);
 
-        ImageIcon restartIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/restart.png");
+        ImageIcon restartIcon = new ImageIcon(getClass().getResource("media/restart.png"));
         JButton restart = new JButton(restartIcon);
         restart.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         restart.setBounds(1200, 15, restartIcon.getIconWidth(), restartIcon.getIconHeight());
@@ -82,7 +82,7 @@ public class GamePanel extends JPanel {
         });
         add(restart);
 
-        Scanner scanner = new Scanner(new File("/Users/egorsergeev/IdeaProjects/Doka3/src/skin.txt"));
+        Scanner scanner = new Scanner(getClass().getResourceAsStream("media/skin.txt"));
         int skin = scanner.nextInt();
         if (skin == 0) {
             this.stroke = 8;

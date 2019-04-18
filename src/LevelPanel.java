@@ -16,7 +16,7 @@ public class LevelPanel extends JPanel {
         setLayout(null);
         setBackground(Color.white);
 
-        ImageIcon backIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/fuckGoBack.png");
+        ImageIcon backIcon = new ImageIcon(getClass().getResource("media/fuckGoBack.png"));
         JButton back = new JButton(backIcon);
         back.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         back.setBounds(15, 15, backIcon.getIconWidth(), backIcon.getIconHeight());

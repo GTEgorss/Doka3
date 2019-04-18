@@ -20,10 +20,10 @@ public class VictoryPanel extends JPanel {
 
         setLayout(null);
         setBackground(Color.white);
-        passed = ImageIO.read(new File("/Users/egorsergeev/IdeaProjects/Doka3/src/passed.png"));
+        passed = ImageIO.read(getClass().getResourceAsStream("media/passed.png"));
 
         if (!last) {
-            ImageIcon nextIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/next.png");
+            ImageIcon nextIcon = new ImageIcon(getClass().getResource("media/next.png"));
             JButton next = new JButton(nextIcon);
             next.setBounds(640, 360, nextIcon.getIconWidth(), nextIcon.getIconHeight());
             next.setBorder(BorderFactory.createLineBorder(Color.white, 0));

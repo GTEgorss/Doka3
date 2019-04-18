@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,12 +12,8 @@ public class Doka3 {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-        MenuPanel menuPanel = null;
-        try {
-            menuPanel = new MenuPanel();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        MenuPanel menuPanel = new MenuPanel();
         frame.add(menuPanel);
 
         GamePanel gamePanel = null;
@@ -55,6 +50,8 @@ public class Doka3 {
         frame.setSize(1280, 719); //The size of my MacBook window area
         frame.setVisible(true);
 
+        JustForFileWriter writer = new JustForFileWriter();
+
         while (true) {
             if (menuPanel.exit) {
                 System.exit(0);
@@ -71,13 +68,7 @@ public class Doka3 {
                 }
             }
             if (menuPanel.lastLevel != bufLastLevel) {
-                try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/lastLevel.txt", false)) {
-                    String string = menuPanel.lastLevel + "";
-                    writer.write(string);
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
+                writer.write(menuPanel, menuPanel.lastLevel + "", "media/lastLevel.txt");
             }
 
             ///////Cooperation with gamePanels
@@ -189,20 +180,8 @@ public class Doka3 {
             }
 
             if (settings.correct) {
-                try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/lastLevel.txt", false)) {
-                    String string = "0";
-                    writer.write(string);
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
-                try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/skin.txt", false)) {
-                    String string = "0";
-                    writer.write(string);
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
+                writer.write(menuPanel, "0", "media/lastLevel.txt");
+                writer.write(menuPanel, "0", "media/skin.txt");
                 for (GamePanel gamePanel1 : gamePanels) {
                     gamePanel1.passed = false;
                 }

@@ -18,7 +18,7 @@ public class PenPanel extends JPanel {
         setLayout(null);
         setBackground(Color.white);
 
-        ImageIcon backIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/fuckGoBack.png");
+        ImageIcon backIcon = new ImageIcon(getClass().getResource("media/fuckGoBack.png"));
         JButton back = new JButton(backIcon);
         back.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         back.setBounds(15, 15, backIcon.getIconWidth(), backIcon.getIconHeight());
@@ -30,7 +30,7 @@ public class PenPanel extends JPanel {
         });
         add(back);
 
-        ImageIcon pen0Icon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/pen0.png");
+        ImageIcon pen0Icon = new ImageIcon(getClass().getResource("media/pen0.png"));
         JButton pen0 = new JButton(pen0Icon);
         pen0.setBorder(BorderFactory.createLineBorder(Color.gray, 1, true));
         pen0.setBounds(200, 200, 256, 256);
@@ -41,7 +41,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 8;
                     gamePanel.color = Color.black;
 
-                    try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/skin.txt", false)) {
+                    try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getPath(), false)) {
                         String string = "0";
                         writer.write(string);
                         writer.flush();
@@ -53,7 +53,7 @@ public class PenPanel extends JPanel {
         });
         add(pen0);
 
-        ImageIcon pen1Icon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/pen1.png");
+        ImageIcon pen1Icon = new ImageIcon(getClass().getResource("media/pen1.png"));
         JButton pen1 = new JButton(pen1Icon);
         pen1.setBorder(BorderFactory.createLineBorder(Color.gray, 1, true));
         pen1.setBounds(500, 200, 256, 256);
@@ -64,7 +64,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 14;
                     gamePanel.color = Color.blue;
 
-                    try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/skin.txt", false)) {
+                    try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getPath(), false)) {
                         String string = "1";
                         writer.write(string);
                         writer.flush();
@@ -76,7 +76,7 @@ public class PenPanel extends JPanel {
         });
         add(pen1);
 
-        ImageIcon pen2Icon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/pen2.png");
+        ImageIcon pen2Icon = new ImageIcon(getClass().getResource("media/pen2.png"));
         JButton pen2 = new JButton(pen2Icon);
         pen2.setBorder(BorderFactory.createLineBorder(Color.gray, 1, true));
         pen2.setBounds(800, 200, 256, 256);
@@ -87,7 +87,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 4;
                     gamePanel.color = Color.green;
 
-                    try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/skin.txt", false)) {
+                    try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getPath(), false)) {
                         String string = "2";
                         writer.write(string);
                         writer.flush();

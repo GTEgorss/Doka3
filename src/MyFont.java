@@ -7,11 +7,9 @@ public class MyFont {
 
     public MyFont() {
         try {
-            helvetica = Font.createFont(Font.TRUETYPE_FONT, new File("/Users/egorsergeev/IdeaProjects/Doka3/src/Helvetica/9202.ttf"));
-            helvetica = helvetica.deriveFont(1, 40F);
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            helvetica = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("media/helvetica/HelveticaBold/HelveticaBold.ttf"));
+            helvetica = helvetica.deriveFont(Font.BOLD, 40F);
+        } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
     }
