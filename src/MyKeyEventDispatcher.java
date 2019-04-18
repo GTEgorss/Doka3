@@ -30,6 +30,13 @@ public class MyKeyEventDispatcher implements KeyEventDispatcher {
                 gamePanel.drawings.clear();
                 gamePanel.drawings.add(new Drawing(gamePanel.stroke, Color.white));
                 gamePanel.started = false;
+                gamePanel.victoryPanel.setVisible(false);
+                gamePanel.victoryPanelDelay = false;
+                gamePanel.victoryPanelOpen = false;
+                gamePanel.defeatPanel.setVisible(false);
+                gamePanel.defeatPanelDelay = false;
+                gamePanel.defeatPanelOpen = false;
+                gamePanel.passed = false;
             }
         }
 

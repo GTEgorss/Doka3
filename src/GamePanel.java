@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GamePanel extends JPanel {
-
     boolean opened = false;
-
     boolean allowed = true;
 
     boolean passed = false;
+    boolean lastLevel = false;
 
     int levelPermanent;
 
@@ -42,9 +41,16 @@ public class GamePanel extends JPanel {
 
     boolean enterPressed = false;
 
+    VictoryPanel victoryPanel;
+    boolean victoryPanelOpen = false;
+    boolean victoryPanelDelay = false;
+    DefeatPanel defeatPanel;
+    boolean defeatPanelDelay = false;
+    boolean defeatPanelOpen = false;
 
+    public GamePanel(int level, boolean lastLevel) throws IOException {
+        this.lastLevel = lastLevel;
 
-    public GamePanel(int level) throws IOException {
         setLayout(null);
 
         ImageIcon backIcon = new ImageIcon("/Users/egorsergeev/IdeaProjects/Doka3/src/fuckGoBack.png");
@@ -68,6 +74,7 @@ public class GamePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     restart(levelPermanent);
+                    passed = false;
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -146,10 +153,20 @@ public class GamePanel extends JPanel {
         listener = new MyMouseListener(this);
         motionListener = new MyMouseMotionListener(this);
         dispatcher = new MyKeyEventDispatcher(this);
+
+        victoryPanel = new VictoryPanel(lastLevel);
+        victoryPanel.setBounds(640 - 400, 360 - 250, 800, 500);
+        add(victoryPanel);
+        victoryPanel.setVisible(false);
+        defeatPanel = new DefeatPanel();
+        victoryPanel.setBounds(640 - 400, 360 - 250, 800, 500);
+        add(defeatPanel);
+        defeatPanel.setVisible(false);
     }
 
     @Override
     public void paintComponent(Graphics g) {
+
         //System.out.print(" panel begin");
 
         //Gravity
@@ -183,6 +200,7 @@ public class GamePanel extends JPanel {
                         drawing.moveDrawing(drawing.movingVector.normalize().multByNumber(drawing.lines.get(0).stroke / 2));
                     }
                 }
+
                 /*
                 for (Drawing drawing0 : drawings) {
                     if (drawing0 != drawing) {
@@ -240,12 +258,34 @@ public class GamePanel extends JPanel {
         }
 
         //System.out.print(" panel end.");
+
+        if (victoryPanelOpen) {
+            try {
+                if (!victoryPanelDelay) {
+                    Thread.sleep(1000);
+                    victoryPanelDelay = true;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            victoryPanel.setVisible(true);
+        }
+
+        if (passed && !victoryPanelOpen) {
+            victoryPanelOpen = true;
+        }
     }
 
     public void restart(int level) throws IOException {
         drawings.clear();
         drawings.add(new Drawing(1, Color.white));
         started = false;
+        victoryPanel.setVisible(false);
+        defeatPanel.setVisible(false);
+        victoryPanelDelay = false;
+        defeatPanelDelay = false;
+        victoryPanelOpen = false;
+        defeatPanelOpen = false;
         if (level == 0) {
             x1 = 1000;
             y1 = 300;

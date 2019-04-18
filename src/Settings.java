@@ -43,6 +43,7 @@ public class Settings extends JPanel {
 
         attention = new JDialog(frame, "Attention");
         attention.setBounds(470, 250, 310, 180);
+        attention.setResizable(false);
         attention.setFocusable(false); //TODO to check
         JPanel panel = new JPanel(null);
         //panel.setBackground(new Color(70,70,70));

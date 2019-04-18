@@ -23,7 +23,7 @@ public class Doka3 {
 
         GamePanel gamePanel = null;
         try {
-            gamePanel = new GamePanel(0);
+            gamePanel = new GamePanel(0, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,7 +31,11 @@ public class Doka3 {
         ArrayList<GamePanel> gamePanels = new ArrayList<>();
         for (int i = 0; i < 5; ++i) {
             try {
-                gamePanels.add(new GamePanel(i));
+                if (i == 4) {
+                    gamePanels.add(new GamePanel(i, true));
+                } else {
+                    gamePanels.add(new GamePanel(i, false));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,8 +56,31 @@ public class Doka3 {
         frame.setVisible(true);
 
         while (true) {
+            if (menuPanel.exit) {
+                System.exit(0);
+            }
+            ///////Last level; memorizing
+            int bufLastLevel = menuPanel.lastLevel;
+            for (int i = 0; i < 5; ++i) {
+                if (gamePanels.get(i).passed) {
+                    if (i < 4) {
+                        menuPanel.lastLevel = i + 1;
+                    } else {
+                        menuPanel.lastLevel = 4;
+                    }
+                }
+            }
+            if (menuPanel.lastLevel != bufLastLevel) {
+                try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/lastLevel.txt", false)) {
+                    String string = menuPanel.lastLevel + "";
+                    writer.write(string);
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+
             ///////Cooperation with gamePanels
-            assert menuPanel != null;
             if (menuPanel.mode == 0 && menuPanel.opened) {
                 gamePanel = gamePanels.get(menuPanel.lastLevel);
                 frame.remove(menuPanel);
@@ -66,12 +93,27 @@ public class Doka3 {
             assert gamePanel != null;
             if (!menuPanel.opened && !gamePanel.opened && menuPanel.mode == 0) {
                 frame.remove(gamePanel);
+                gamePanel.passed = false;
                 gamePanel.opened = false;
                 frame.add(menuPanel);
                 gamePanel.restart(gamePanel.levelPermanent);
                 menuPanel.opened = true;
                 frame.setVisible(true);
                 menuPanel.mode = -1;
+            }
+
+            if (gamePanel.victoryPanel.nextClicked) {
+                frame.remove(gamePanel);
+                gamePanel.opened = false;
+                gamePanel.passed = false;
+                gamePanel.restart(gamePanel.levelPermanent);
+
+                gamePanel = gamePanels.get(menuPanel.lastLevel);
+                frame.add(gamePanel);
+                gamePanel.opened = true;
+                frame.setVisible(true);
+
+                gamePanel.victoryPanel.nextClicked = false;
             }
             ////////
 
@@ -168,26 +210,6 @@ public class Doka3 {
                 menuPanel.lastLevel = 0;
             }
             /////
-
-            int bufLastLevel = menuPanel.lastLevel;
-            for (int i = 0; i < 5; ++i) {
-                if (gamePanels.get(i).passed) {
-                    if (i < 4) {
-                        menuPanel.lastLevel = i + 1;
-                    } else {
-                        menuPanel.lastLevel = 4;
-                    }
-                }
-            }
-            if (menuPanel.lastLevel != bufLastLevel) {
-                try (FileWriter writer = new FileWriter("/Users/egorsergeev/IdeaProjects/Doka3/src/lastLevel.txt", false)) {
-                    String string = menuPanel.lastLevel + "";
-                    writer.write(string);
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
 
             if (!gamePanel.enterPressed) frame.repaint();
             Thread.sleep(20); //Standard sleep
