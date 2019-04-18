@@ -93,17 +93,18 @@ public class Doka3 {
                 menuPanel.mode = -1;
             }
 
+
             if (gamePanel.victoryPanel.nextClicked) {
                 frame.remove(gamePanel);
                 gamePanel.opened = false;
                 gamePanel.passed = false;
                 gamePanel.restart(gamePanel.levelPermanent);
+                gamePanel.victoryPanel.nextClicked = false;
 
                 gamePanel = gamePanels.get(menuPanel.lastLevel);
                 frame.add(gamePanel);
                 gamePanel.opened = true;
                 frame.setVisible(true);
-
                 gamePanel.victoryPanel.nextClicked = false;
             }
             ////////
