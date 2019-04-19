@@ -41,6 +41,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 8;
                     gamePanel.color = Color.black;
 
+                    /*
                     try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getFile(), false)) {
                         String string = "0";
                         writer.write(string);
@@ -48,6 +49,7 @@ public class PenPanel extends JPanel {
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
+                    */
                 }
             }
         });
@@ -64,6 +66,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 14;
                     gamePanel.color = Color.blue;
 
+                    /*
                     try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getFile(), false)) {
                         String string = "1";
                         writer.write(string);
@@ -71,6 +74,7 @@ public class PenPanel extends JPanel {
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
+                    */
                 }
             }
         });
@@ -87,6 +91,7 @@ public class PenPanel extends JPanel {
                     gamePanel.stroke = 4;
                     gamePanel.color = Color.green;
 
+                    /*
                     try (FileWriter writer = new FileWriter(getClass().getResource("media/skin.txt").getPath().replaceAll("!", ""), false)) {
                         String string = "2";
                         writer.write(string);
@@ -94,6 +99,7 @@ public class PenPanel extends JPanel {
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
+                    */
                 }
             }
         });

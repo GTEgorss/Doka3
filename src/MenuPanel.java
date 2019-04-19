@@ -102,11 +102,14 @@ public class MenuPanel extends JPanel {
                 }
             }
         }
+
+        /*
         try (FileWriter writer = new FileWriter(getClass().getResource("media/lastLevel.txt").getPath(), false)) {
             writer.write(lastLevel + "");
             writer.flush();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        */
     }
 }

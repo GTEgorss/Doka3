@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,31 +55,14 @@ public class GamePanel extends JPanel {
     AudioInputStream ais;
     Clip clip;
 
-
-    //////////
-    /*
-    try {
-        AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
-        Clip clip = AudioSystem.getClip();
-        clip.open(ais);
-        clip.setFramePosition(6000);
-        clip.start();
-        Thread.sleep(462);
-        clip.stop();
-        clip.close();
-    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException exc) {
-        exc.printStackTrace();
-    }
-    */
-    /////////
-
     public GamePanel(int level, boolean lastLevel) throws IOException, UnsupportedAudioFileException, InterruptedException, LineUnavailableException {
         this.lastLevel = lastLevel;
-        //soundFile = getClass().getResourceAsStream("media/Kitnis.wav"); //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        //ais = AudioSystem.getAudioInputStream(soundFile);
-        //clip = AudioSystem.getClip();
-        //clip.open(ais);
-        //clip.setFramePosition(0);
+
+        URL defaultSound = getClass().getResource("media/Kitnis.wav") ;
+        ais = AudioSystem.getAudioInputStream(defaultSound);
+        clip = AudioSystem.getClip();
+        clip.open(ais);
+        clip.setFramePosition(0);
 
         setLayout(null);
 
@@ -111,8 +95,9 @@ public class GamePanel extends JPanel {
         });
         add(restart);
 
-        Scanner scanner = new Scanner(getClass().getResourceAsStream("media/skin.txt"));
-        int skin = scanner.nextInt();
+
+        //Scanner scanner = new Scanner(getClass().getResourceAsStream("media/skin.txt"));
+        int skin = 0; //scanner.nextInt();
         if (skin == 0) {
             this.stroke = 8;
             this.color = Color.black;
@@ -315,7 +300,7 @@ public class GamePanel extends JPanel {
         if (victoryPanelOpen) {
             try {
                 if (!victoryPanelDelay) {
-//                    clip.start(); //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+                    clip.start();
                     Thread.sleep(1000);
                     victoryPanelDelay = true;
                 }
