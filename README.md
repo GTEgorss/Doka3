@@ -47,3 +47,7 @@ Yegor "GTEgorss" "noartu" Sergeyev
 - [vk](https://vk.com/noartu)
 - [instagram](https://instagram.com/gtegorss)
 - [steam](https://steamcommunity.com/id/gtegorss/)
+
+### Acknowledgments
+1. It is my school project
+2. Big thanks to [my teacher](www.polarnick.com)
