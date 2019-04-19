@@ -54,20 +54,54 @@ public class Line {
         mass = this.getLength() * density;
 
         if (stroke > 1) {
-            vertexes[0] = new Dot(Math.min(y0, y1) == y0 ? x0 : x1 + stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(x1 - x0), Math.min(y0, y1) - stroke / 2 * Math.abs(Math.cos(angle.angle))); //Upper outline
-            vertexes[1] = new Dot(Math.max(y0, y1) == y1 ? x1 : x0 + stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(x1 - x0), Math.max(y0, y1) - stroke / 2 * Math.abs(Math.cos(angle.angle))); //Upper outline
-            vertexes[2] = new Dot(Math.max(y0, y1) == y1 ? x1 : x0 - stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(x1 - x0), Math.max(y0, y1) + stroke / 2 * Math.abs(Math.cos(angle.angle))); //Lower outline
-            vertexes[3] = new Dot(Math.min(y0, y1) == y0 ? x0 : x1 - stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(x1 - x0), Math.min(y0, y1) + stroke / 2 * Math.abs(Math.cos(angle.angle))); //Lower outline
+            if (x0 == x1) {
+                double a0 = x0;
+                double b0 = Math.max(y0, y1); //ниже
+                double a1 = x0;
+                double b1 = Math.min(y0, y1); //выше
+                vertexes[0] = new Dot(a0 - stroke / 2, b0); //Upper outline
+                vertexes[1] = new Dot(a1 - stroke / 2, b1); //Upper outline
+                vertexes[2] = new Dot(a1 + stroke / 2, b1); //Lower outline
+                vertexes[3] = new Dot(a0 + stroke / 2, b0); //Lower outline
+
+            } else {
+                if (y0 == y1) {
+                    double a0 = x0;
+                    double b0 = y0; //ниже
+                    double a1 = x1;
+                    double b1 = y1; //выше
+
+                    vertexes[0] = new Dot(a0, b0 - stroke / 2); //Upper outline
+                    vertexes[1] = new Dot(a1, b1 - stroke / 2); //Upper outline
+                    vertexes[2] = new Dot(a1, b1 + stroke / 2); //Lower outline
+                    vertexes[3] = new Dot(a0, b0 + stroke / 2); //Lower outline
+
+                } else {
+                    double a0 = (Math.max(y0, y1) == y0) ? x0 : x1;
+                    double b0 = Math.max(y0, y1); //ниже
+                    double a1 = (Math.min(y0, y1) == y0) ? x0 : x1;
+                    double b1 = Math.min(y0, y1); //выше
+
+                    vertexes[0] = new Dot(a0 - stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(a1 - a0), b0 - stroke / 2 * Math.abs(Math.cos(angle.angle))); //Upper outline
+                    vertexes[1] = new Dot(a1 - stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(a1 - a0), b1 - stroke / 2 * Math.abs(Math.cos(angle.angle))); //Upper outline
+                    vertexes[2] = new Dot(a1 + stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(a1 - a0), b1 + stroke / 2 * Math.abs(Math.cos(angle.angle))); //Lower outline
+                    vertexes[3] = new Dot(a0 + stroke / 2 * Math.abs(Math.sin(angle.angle)) * Math.signum(a1 - a0), b0 + stroke / 2 * Math.abs(Math.cos(angle.angle))); //Lower outline
+                }
+            }
         }
     }
 
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        for (int i = 0; i < 3; ++i) {
-            g.setColor(Color.green);
-            g2.setStroke(new BasicStroke(1));
-            g.drawLine((int) vertexes[i].x, (int) vertexes[i].y, (int) vertexes[(i + 1) % 4].x, (int) vertexes[(i + 1) % 4].y);
-        }
+        g.setColor(Color.green);
+        g2.setStroke(new BasicStroke(1));
+        /*
+        g.drawLine((int)vertexes[0].x, (int)vertexes[0].y, (int)vertexes[1].x, (int)vertexes[1].y);
+        g.drawLine((int)vertexes[1].x, (int)vertexes[1].y, (int)vertexes[2].x, (int)vertexes[2].y);
+        g.drawLine((int)vertexes[2].x, (int)vertexes[2].y, (int)vertexes[3].x, (int)vertexes[3].y);
+        g.drawLine((int)vertexes[0].x, (int)vertexes[0].y, (int)vertexes[3].x, (int)vertexes[3].y);
+        */
+
         g.setColor(color);
         g2.setStroke(new BasicStroke((int) stroke));
         g.drawLine((int) x0, (int) y0, (int) x1, (int) y1);
@@ -161,11 +195,13 @@ public class Line {
             bufLine.prevStroke = stroke;
             return bufLine;
         }
+        /*
         if (mode == 3) {
             Line bufLine = new Line(vertexes[0], vertexes[3], 1, color);
             bufLine.prevStroke = stroke;
             return bufLine;
         }
+        */
         return null;
     }
 }

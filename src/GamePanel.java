@@ -1,3 +1,4 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,8 @@ public class GamePanel extends JPanel {
     boolean allowed = true;
 
     boolean passed = false;
-    boolean lastLevel = false;
+    boolean lastLevel;
+    boolean fail = false;
 
     int levelPermanent;
 
@@ -48,8 +50,35 @@ public class GamePanel extends JPanel {
     boolean defeatPanelDelay = false;
     boolean defeatPanelOpen = false;
 
-    public GamePanel(int level, boolean lastLevel) throws IOException {
+    File soundFile;
+    AudioInputStream ais;
+    Clip clip;
+
+
+    //////////
+    /*
+    try {
+        AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
+        Clip clip = AudioSystem.getClip();
+        clip.open(ais);
+        clip.setFramePosition(6000);
+        clip.start();
+        Thread.sleep(462);
+        clip.stop();
+        clip.close();
+    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException exc) {
+        exc.printStackTrace();
+    }
+    */
+    /////////
+
+    public GamePanel(int level, boolean lastLevel) throws IOException, UnsupportedAudioFileException, InterruptedException, LineUnavailableException {
         this.lastLevel = lastLevel;
+        soundFile = new File(getClass().getResource("media/Kitnis.wav").getPath());
+        ais = AudioSystem.getAudioInputStream(soundFile);
+        clip = AudioSystem.getClip();
+        clip.open(ais);
+        clip.setFramePosition(0);
 
         setLayout(null);
 
@@ -159,7 +188,7 @@ public class GamePanel extends JPanel {
         add(victoryPanel);
         victoryPanel.setVisible(false);
         defeatPanel = new DefeatPanel();
-        victoryPanel.setBounds(640 - 400, 360 - 250, 800, 500);
+        defeatPanel.setBounds(640 - 400, 360 - 250, 800, 500);
         add(defeatPanel);
         defeatPanel.setVisible(false);
     }
@@ -186,7 +215,9 @@ public class GamePanel extends JPanel {
 
             passed = ball[0].collisionBallBall(ball[1]);
 
+            int count = 0;
             for (Drawing drawing : drawings) {
+                count++;
                 if (drawing.finished) {
                     ball[0].collisionBallDrawing(drawing);
                     ball[1].collisionBallDrawing(drawing);
@@ -201,19 +232,22 @@ public class GamePanel extends JPanel {
                     }
                 }
 
-                /*
+                int bufCount = 0;
                 for (Drawing drawing0 : drawings) {
+                    bufCount++;
                     if (drawing0 != drawing) {
                         if (drawing.collisionDrawingDrawing(drawing0)) {
-                            drawing.doCollisionDrawingDrawing(drawing0);
-                            while (drawing.collisionDrawingDrawing(drawing0)) {
-                                drawing.moveDrawing(drawing.movingVector);
+                            if (!(drawing.gravity == 0 && drawing0.gravity == 0)) {
+                                drawing.collisionDrawingDrawing(drawing0);
+                                if (count <= bufCount) {
+                                    drawing0.doCollisionDrawingDrawing(drawing0);
+                                } else {
+                                    drawing.doCollisionDrawingDrawing(drawing);
+                                }
                             }
-                            drawing.moveDrawing(drawing.movingVector.normalize().multByNumber(drawing.lines.get(0).stroke / 2));
                         }
                     }
                 }
-                */
             }
 
             for (Obstacle obstacle : obstacles) {
@@ -259,9 +293,29 @@ public class GamePanel extends JPanel {
 
         //System.out.print(" panel end.");
 
+
+        ////Fail
+        if (fail) {
+            try {
+                if (defeatPanelDelay) {
+                    Thread.sleep(1000);
+                    defeatPanelDelay = false;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            defeatPanel.setVisible(true);
+            fail = false;
+            started = false;
+        }
+        fail = !(this.checkBall(ball[0]) && this.checkBall(ball[1]));
+        if (fail && started) defeatPanelDelay = true;
+
+        ////Victory
         if (victoryPanelOpen) {
             try {
                 if (!victoryPanelDelay) {
+                    clip.start();
                     Thread.sleep(1000);
                     victoryPanelDelay = true;
                 }
@@ -286,6 +340,7 @@ public class GamePanel extends JPanel {
         defeatPanelDelay = false;
         victoryPanelOpen = false;
         defeatPanelOpen = false;
+        fail = false;
         if (level == 0) {
             x1 = 1000;
             y1 = 300;
@@ -328,5 +383,9 @@ public class GamePanel extends JPanel {
                 }
             }
         }
+    }
+
+    public boolean checkBall(Ball ball) {
+        return ball.x + ball.radius >= 0 && ball.x - ball.radius <= getWidth() && ball.y + ball.radius >= 0 && ball.y - ball.radius <= getHeight();
     }
 }

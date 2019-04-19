@@ -1,3 +1,5 @@
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +23,10 @@ public class Doka3 {
             gamePanel = new GamePanel(0, false);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
         }
 
         ArrayList<GamePanel> gamePanels = new ArrayList<>();
@@ -32,6 +38,10 @@ public class Doka3 {
                     gamePanels.add(new GamePanel(i, false));
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
                 e.printStackTrace();
             }
         }

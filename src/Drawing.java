@@ -113,8 +113,8 @@ public class Drawing {
         for (Line line1 : lines) {
             line1.speedX = 0;
             line1.speedY = 0;
-            gravity = 0;
         }
+        gravity = 0;
     }
 
     public void moveDrawing(Vector vector) {
@@ -137,7 +137,7 @@ public class Drawing {
         boolean intersection = false;
         for (Line line0 : lines) {
             for (Line line1 : drawing.lines) {
-                intersection = line0.intersectionLineLine(line1);
+                if (line0.getLength() != 0 && line1.getLength() != 0) intersection = line0.intersectionLineLine(line1);
                 if (intersection) break;
             }
             if (intersection) break;
@@ -146,9 +146,16 @@ public class Drawing {
     }
 
     public void doCollisionDrawingDrawing(Drawing drawing) {
+        /*
         if (lines.get(0).speedX != 0 || lines.get(0).speedY != 0)
             movingVector = new Vector(-lines.get(0).speedX / 4, -lines.get(0).speedY / 4); //TODO speed of the line of the collision
         else
             movingVector = new Vector(-drawing.lines.get(0).speedX / 4, -drawing.lines.get(0).speedY / 4); //TODO speed of the line of the collision
+            */
+        for (Line line : drawing.lines) {
+            line.speedX = 0;
+            line.speedY = 0;
+        }
+        gravity = 0;
     }
 }
