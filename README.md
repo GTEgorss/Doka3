@@ -28,7 +28,7 @@ After lauching **Doka3** all in your hands:)
 2. You can reach your goal anyway you like, drawing anything with your pen, but don't let the balls get off the screen)
 3. After you stop drawing the first curve, physics become active: everything which should fall is falling, everything which should move is moving. You can draw more curves, but only during the movement with physics on
 4. Each level has its own idea and its own system of obstacles and other things, which distance you from you goal
-
+www.polarnick.com
 ### Opportunities 
  1. In **Doka3** your able to choose out of *three pens*, which are all available from the very beginning of the game. You can find them in *pens menu*
  2. You can easily *redo* any levels you want out of you have already passed, you should just enter the *levels menu*
@@ -50,4 +50,4 @@ Yegor "GTEgorss" "noartu" Sergeyev
 
 ### Acknowledgments
 1. It is my school project
-2. Big thanks to [my teacher](www.polarnick.com)
+2. Big thanks to [my teacher](http://polarnick.com/index_ru.html)
