@@ -93,20 +93,22 @@ public class MenuPanel extends JPanel {
     public void upgrade(ArrayList<GamePanel> gamePanels) {
         ///////Last level; memorizing
         int bufLastLevel = lastLevel;
-        for (int i = 0; i < 5; ++i) {
-            if (gamePanels.get(i).passed) {
-                if (i < 4) {
-                    lastLevel = i + 1;
-                } else {
-                    lastLevel = 4;
+        if (gamePanels.size() > 0) {
+            for (int i = 0; i < 5; ++i) {
+                if (gamePanels.get(i).passed) {
+                    if (i < 4) {
+                        lastLevel = i + 1;
+                    } else {
+                        lastLevel = 4;
+                    }
                 }
             }
-        }
-        try (FileWriter writer = new FileWriter(getClass().getResource("media/lastLevel.txt").getPath(), false)) {
-            writer.write(lastLevel + "");
-            writer.flush();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            try (FileWriter writer = new FileWriter(getClass().getResource("media/lastLevel.txt").getPath(), false)) {
+                writer.write(lastLevel + "");
+                writer.flush();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }

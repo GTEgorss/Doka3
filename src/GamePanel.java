@@ -74,11 +74,11 @@ public class GamePanel extends JPanel {
 
     public GamePanel(int level, boolean lastLevel) throws IOException, UnsupportedAudioFileException, InterruptedException, LineUnavailableException {
         this.lastLevel = lastLevel;
-        soundFile = new File(getClass().getResource("media/Kitnis.wav").getPath());
-        ais = AudioSystem.getAudioInputStream(soundFile);
-        clip = AudioSystem.getClip();
-        clip.open(ais);
-        clip.setFramePosition(0);
+        //soundFile = getClass().getResourceAsStream("media/Kitnis.wav"); //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        //ais = AudioSystem.getAudioInputStream(soundFile);
+        //clip = AudioSystem.getClip();
+        //clip.open(ais);
+        //clip.setFramePosition(0);
 
         setLayout(null);
 
@@ -315,7 +315,7 @@ public class GamePanel extends JPanel {
         if (victoryPanelOpen) {
             try {
                 if (!victoryPanelDelay) {
-                    clip.start();
+//                    clip.start(); //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
                     Thread.sleep(1000);
                     victoryPanelDelay = true;
                 }
