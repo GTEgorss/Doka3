@@ -13,7 +13,7 @@ If you don't have **Java 8** on your computer, you have to down load it, for exa
   - Open the .jar file
 #### 2. For any (2nd option)
   - Download all files of the project
-  - Launch it using Terminal or use a development enviroment with a compiler (for example, IntelliJ IDEA, which can be downloaded from [here](https://www.jetbrains.com/idea/#chooseYourEdition) 
+  - Launch it using Terminal or use a descreen0.pngvelopment enviroment with a compiler (for example, IntelliJ IDEA, which can be downloaded from [here](https://www.jetbrains.com/idea/#chooseYourEdition) 
 #### 3. For macOS
   - Go [here](https://github.com/GTEgorss/Doka3/releases/tag/v1.0.1)
   - Download the .zip file
@@ -28,17 +28,17 @@ After lauching **Doka3** all in your hands:)
 2. You can reach your goal anyway you like, drawing anything with your pen, but don't let the balls get off the screen)
 3. After you stop drawing the first curve, physics become active: everything which should fall is falling, everything which should move is moving. You can draw more curves, but only during the movement with physics on
 4. Each level has its own idea and its own system of obstacles and other things, which distance you from you goal
-
+www.polarnick.com
 ### Opportunities 
  1. In **Doka3** your able to choose out of *three pens*, which are all available from the very beginning of the game. You can find them in *pens menu*
  2. You can easily *redo* any levels you want out of you have already passed, you should just enter the *levels menu*
  3. If you decide to restart the game progress, you can delete the current in the settings 
  
 # Screenshots
-![screen0](https://github.com/GTEgorss/Doka3/blob/master/src/media/screen0.png)
-![screen1](https://github.com/GTEgorss/Doka3/blob/master/src/media/screen1.png)
-![screen2](https://github.com/GTEgorss/Doka3/blob/master/src/media/screen2.png)
-![screen3](https://github.com/GTEgorss/Doka3/blob/master/src/media/screen3.png)
+![screen0](https://github.com/GTEgorss/Doka3/blob/master/src/screen0.png)
+![screen1](https://github.com/GTEgorss/Doka3/blob/master/src/screen1.png)
+![screen2](https://github.com/GTEgorss/Doka3/blob/master/src/screen2.png)
+![screen3](https://github.com/GTEgorss/Doka3/blob/master/src/screen3.png)
 ### Author
 Yegor "GTEgorss" "noartu" Sergeyev
 - [gmail](noartu@gmail.com)
@@ -47,3 +47,7 @@ Yegor "GTEgorss" "noartu" Sergeyev
 - [vk](https://vk.com/noartu)
 - [instagram](https://instagram.com/gtegorss)
 - [steam](https://steamcommunity.com/id/gtegorss/)
+
+### Acknowledgments
+1. It is my school project
+2. Big thanks to [my teacher](http://polarnick.com/index_ru.html)
