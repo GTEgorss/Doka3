@@ -16,8 +16,6 @@ public class Ball {
 
     boolean collision = false;
 
-    int count = 0;
-
     public Ball(int x, int y, Color color) {
         this.x = x;
         this.y = y;
